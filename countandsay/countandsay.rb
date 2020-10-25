@@ -12,6 +12,7 @@ def next_number(str)
 	end
 	return result
 end
+
 def count_and_say(num)
 	puts str='1'
 	for i in 0...num-1

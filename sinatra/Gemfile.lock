@@ -31,10 +31,10 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  pg
   puma
   sinatra
   sinatra-contrib
-  pg
 
 BUNDLED WITH
    2.1.4

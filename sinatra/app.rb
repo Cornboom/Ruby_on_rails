@@ -1,68 +1,63 @@
-require "sinatra"
-require "byebug"
-require "sinatra/reloader" if development?
-require "pg"
+require 'pg'
+require 'sinatra'
+require 'byebug'
+require 'sinatra/reloader' if development?
+require './todo.rb'
 
-configure{set: server, :puma}
+configure {set :server, :puma}
 
-connection = PG.connection(dbname: "Ruby", host: "localhost", user: "testuser2", password: "12345")
+conn = PG.connection(dbname: 'Ruby', host: 'localhost',user: 'testuser2', password: '12345')
 
-get "/" do 
-	"FlatStack"
-
+get '/' do
+	"Flatstack"	
 end
 
-get "/todo" do
-
-@results = connection.exec("SELECT * FROM App")
-
-erb :index
+get '/todo' do
+	@result = ToDo.all(conn)
+	
+	erb :index
 end
 
-get "/todo/new" do
-erb :new
+get '/todo/new' do
+	erb :new
 end
 
-get "/todo/:id/edit" do
-@result = connection.exec("SELECT * FROM App WHERE id=#{params['id']}")[0]
-
-erb :edit
+get '/todo/:id/edit' do
+	@result = ToDo.findById(conn, params['id'])
+	
+	erb :edit
 end
 
-get "/todo/:id" do
-@result = connection.exec("SELECT * FROM App WHERE id=#{params['id']}")[0]
-
-erb :show
+get '/todo/:id' do
+	@result = ToDo.findById(conn, params['id'])
+	
+	erb :show
 end
 
-
-
-post "/todo" do
-
-if params["custom_method"] == "DELETE"
-result = connection.exec("DELETE FROM App WHERE id=#{params['id']}")
-
-redirect to("/todo")
-
-else
-
-result = connection.exec("INSERT INTO App (title) VALUES ('#{params["title"]}') RETURNING id")
-id = result[0]["id"]
-
-redirect to("/todo/#{id}")
-end
+post '/todo' do
+	if params['custom_method'] == 'DELETE'
+		ToDo.findById(conn, params['id']).delete(conn)
+		
+		redirect to('/todo')
+	else
+	
+		todo = ToDo.new(params['title'])
+		todo.save(conn)
+		redirect to("/todo/#{todo.id}")
+	end
 end
 
+post '/todo/:id' do
+	id = params['id']
+	if params['custom_method'] == 'PUT'
+		ToDo.findById(conn, id).update(conn, params['title'])
+		@result = id
+		
+	end
 
-
-
-
-post "/todo/:id" do
-
-if params["custom_method"] == "PUT"
-result = connection.exec("UPDATE todo SET title='#{params['title']}' WHERE id=#{params['id']}")
-id = params["id"]
-
-redirect to("/todo/#{id}")
+	redirect to("/todo/#{id}")
 end
+
+get '/test' do
+	ToDo.where(conn, {id: 2, title: "tuctuc"})
 end

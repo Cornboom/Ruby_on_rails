@@ -1,26 +1,82 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {ITask} from "../../taskModule/interfaces";
-import {useHistory} from 'react-router';
 import styled from 'styled-components';
+import {A} from "../basic/A";
+import {TaskStatus} from "../../taskModule/enums";
+import {useDispatch} from "react-redux";
+import {removeTaskById, toggleTaskStatusById} from "../../taskModule/actions";
+import {Row} from "../basic/Grid";
 
 interface IProps {
   task: ITask;
 }
 
-const TaskListItemWrapper = styled.div`
-cursor: pointer;
+const TaskListItemWrapper = styled(Row)`
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
 `;
 
+const TaskListItemInnerWrapper = styled(Row)`
+  align-items: center;
+`
 
-export const TaskListItem: FC<IProps> = ({task}) =>{
-  const history = useHistory();
+interface IChecked {
+    isChecked: boolean;
+}
 
-  const handleClick = () =>{
-    history.push("/tasks/"+task.id);
-  };
+const TaskLink = styled(A)<IChecked>`
+  ${props => props.isChecked && `
+    color: gray;
+    text-decoration: line-through;
+  `}
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+`;
+
+const DeleteButton = styled.button`
+  outline: transparent;
+  background-color: tomato;
+  border-radius: 5px;
+  padding: 5px;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const TaskListItem: FC<IProps> = ({ task }) => {
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = () => {
+      dispatch(toggleTaskStatusById(task.id));
+  }
+
+  const handleDeleteTask = () => {
+      dispatch(removeTaskById(task.id));
+  }
+
+  const isChecked = task.status === TaskStatus.CHECKED;
 
   return (
-  <TaskListItemWrapper onClick={handleClick}>
-    {task.name}
-  </TaskListItemWrapper>);
+    <TaskListItemWrapper>
+        <TaskListItemInnerWrapper>
+            <input type="checkbox" onClick={handleCheckboxChange} checked={isChecked}/>
+            <TaskLink to={`/tasks/${task.id}`} isChecked={isChecked}>
+                {task.name}
+            </TaskLink>
+        </TaskListItemInnerWrapper>
+        <DeleteButton onClick={handleDeleteTask}>
+            X
+        </DeleteButton>
+    </TaskListItemWrapper>
+  );
 };

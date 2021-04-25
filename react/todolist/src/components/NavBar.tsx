@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {A} from "./basic/A";
 
@@ -17,7 +16,7 @@ export const NavBar = () =>{
   </A>
 
   <A to="/tasks">
-  TasksList
+  Tasks List
   </A>
 
 

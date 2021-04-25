@@ -10,6 +10,8 @@ import {
         Redirect
         } from 'react-router-dom';
 import styled from 'styled-components';
+import {Provider} from 'react-redux';
+import {store} from "./store/store";
 
 const AppWrapper = styled.div`
 padding: 15px;
@@ -24,6 +26,7 @@ align-items: center;
 function App() {
   return (
       <AppWrapper>
+      <Provider store={store}>
           <BrowserRouter>
             <Switch>
 
@@ -47,7 +50,7 @@ function App() {
 
               <NavBar/>
             </BrowserRouter>
-
+            </Provider>
       </AppWrapper>
 
 

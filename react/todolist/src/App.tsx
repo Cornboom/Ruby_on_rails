@@ -52,11 +52,6 @@ function App() {
             </BrowserRouter>
             </Provider>
       </AppWrapper>
-
-
-
-
-
   );
 }
 

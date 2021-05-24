@@ -1,0 +1,20 @@
+h2
+  | Добавление нового поста
+= form_for :post, url: posts_path do |f|
+  - if @post.errors.any?
+    - @post.errors.full_messages.each do |msg|
+      .alert.alert-danger
+        = msg
+  p
+    strong
+      | Название
+      br
+    = f.text_field(:title, {:class => 'form-control', :placeholder => "Напишите название"})
+  p
+    strong
+      | Текст статьи
+      br
+    = f.text_field(:body, {:class => 'form-control', :placeholder => "Напишите текст"})
+  p
+    = f.submit({:class => 'btn btn-outline-dark'})
+    = link_to "Главная страница", home_path, :class => 'btn btn-outline-dark'

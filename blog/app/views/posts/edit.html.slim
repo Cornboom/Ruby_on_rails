@@ -1,0 +1,17 @@
+h2
+  | Редактирование поста
+= form_for :post, url: post_path(@post), method: :patch do |f|
+  - if @post.errors.any?
+    - @post.errors.full_messages.each do |msg|
+      .alert.alert-danger
+        = msg
+  p
+    |  Название
+    br
+    = f.text_field(:title, {:class => 'form-control'})
+  p
+    |  Текст статьи
+    br
+    = f.text_field(:body, {:class => 'form-control'})
+  p
+    = f.submit({:class => 'btn btn-success'})

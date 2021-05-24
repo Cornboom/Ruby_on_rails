@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title
+      | FlatStack's blog
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    style
+      |  body { background-image: url('https://million-wallpapers.ru/wallpapers/3/63/452660933689335/zolotoj-i-sinij.jpg'); background-size: cover; cursor: pointer; font-style: oblique}
+    .d-flex.flex-column.flex-md-row.align-items-center.p-3.mb-2.bg-light.bg-gradient.text-dark.border-bottom.shadow-sm
+      h5.my-0.mr-md-auto.font-weight-bold
+        | FlatStack's blog
+      nav.my-2.my-md-0.mr-md-3
+        span.p-2.text-dark[href="#"]
+          = link_to "Главная страница", home_path
+        span.p-2.text-dark[href="#"]
+          = link_to "Про нас", about_path
+      span.p-2.text-dark
+        = link_to "Добавление статьи", new_post_path
+    .container
+      = yield

@@ -1,0 +1,10 @@
+h1
+  | Опубликованные статьи
+- @post.each do |post|
+  .alert.alert-light
+    h3
+      = post.title
+    p
+      = post.body
+    = link_to "Прочитать пост", post_path(post), :class => 'btn btn-outline-dark'
+  br

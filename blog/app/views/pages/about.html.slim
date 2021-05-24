@@ -1,0 +1,21 @@
+h2
+  strong
+    = @heading
+p[style="color: black; font-size: 35px; text-decoration: underline"]
+  | Список задействованного функционала:
+ul[style="font-family: Arial; color: black; font-size: 30px"]
+  li
+    | Создание статьи
+  li
+    | Редактирование статьи
+  li
+    | Удаление статьи
+  li
+    | Добавление комментария к статье
+  li
+    | Прочтение статьи
+  li
+    | Страница информации
+  li
+    | Главная страница со всеми статьями
+= link_to "Главная страница", home_path, :class => 'btn btn-outline-dark btn-lg'

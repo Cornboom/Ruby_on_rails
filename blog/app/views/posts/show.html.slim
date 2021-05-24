@@ -1,0 +1,34 @@
+h2
+  = @post.title
+p
+  = @post.body
+hr
+= link_to "Редактировать статью", edit_post_path(@post), :class => 'btn btn-outline-dark'
+= link_to "Удалить статью", post_path(@post), method: :delete, data: {confirm: "Хотите удалить статью?"}, :class => 'btn btn-outline-danger'
+hr
+h2
+  | Все комментарии:
+- @post.comments.each do |comment|
+  .alert.alert-light
+    p
+      strong
+        = comment.username
+      | :
+      = comment.body
+  br
+hr
+h2
+  | Добавление комментария
+= form_for([@post, @post.comments.build]) do |f|
+  p
+    strong
+      | Пользователь
+      br
+    = f.text_field(:username, {:class => 'form-control', :placeholder => "Напишите свой никнейм"})
+  p
+    strong
+      | Текст комментария
+      br
+    = f.text_field(:body, {:class => 'form-control', :placeholder => "Напишите комментарий"})
+  p
+    = f.submit("Добавить комментарий", {:class => 'btn btn-outline-dark'})

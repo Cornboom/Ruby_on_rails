@@ -1,0 +1,8 @@
+.container= form_for([@card, @card.comments.build]) do |form|
+  .fields
+    .container style="margin-left: -300px"
+      h4 style="margin: 20px auto, font-style:bold;" Post comment
+      p= form.text_field :body, class: 'form-control', placeholder: 'Write your comment here'
+      p= form.text_field :user_id, class: 'form-control', hidden: true, value: session[:user_id]
+  .actions style="margin-left: -290px"
+    p= form.submit 'Post', class: 'btn btn-warning'

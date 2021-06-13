@@ -1,0 +1,11 @@
+h1.text-center style="margin-bottom: 35px" All Posts
+.container
+  .row.row-cols-auto
+    - @cards.each do |card|
+      .card.mx-1.my-1
+        h3.card-header.text-center = card.title
+        .card-body.btn-group style="display: block; height: 100%; weight: 100%; padding-top: 100%;"
+          = link_to 'Show', card, class: 'btn btn-primary rounded', style: "margin: auto 5px"
+          - if @current_user && @current_user.id == card.user_id
+            = link_to 'Edit', [:edit, card], class: 'btn btn-warning rounded', style: "margin: auto 5px"
+            = link_to 'Destroy', card, method: :delete, class: 'btn btn-danger rounded', style: "margin: auto 5px"

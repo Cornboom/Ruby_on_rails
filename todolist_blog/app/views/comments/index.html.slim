@@ -1,0 +1,9 @@
+h3 style="margin: 20px auto -10px" Comments:
+.container.py-3 style="opacity: 0.8;"
+  - @card.comments.each do |comment|
+    .alert.alert-light.border
+      .text-primary= User.find_by(id: comment.user_id).nickname
+      /.text-body= comment.body
+      h1 style="font-size: 30px; height: auto; border: 2px dashed gold;" =comment.body
+      - if @current_user && @current_user.id == comment.user_id
+        = link_to 'Delete', card_comment_path(@card, comment), method: :delete, class: :'text-secondary', style:"border: 3px outset red; padding: 4px; border-radius: 2px; "

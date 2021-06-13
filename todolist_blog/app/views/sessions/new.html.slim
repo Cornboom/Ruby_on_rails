@@ -1,0 +1,6 @@
+h1.text-center Sign in
+.container
+  .depot_form
+    - if flash[:alert]
+      .alert.alert-danger= flash[:alert]
+= render partial: 'sign_in_form'

@@ -1,0 +1,8 @@
+.container= form_with model: @card do |form|
+  h4= form.label :title
+  p= form.text_field :title, class: 'form-control', placeholder: 'Write your title here'
+  h4= form.label :description
+  p= form.text_area :description, class: 'form-control', placeholder: 'Write your description here'
+  p= form.submit "Push Post", class: 'btn btn-warning'
+
+  = link_to 'Back to list', cards_path, class: 'btn btn-dark'

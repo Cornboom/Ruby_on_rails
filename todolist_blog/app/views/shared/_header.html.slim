@@ -1,0 +1,23 @@
+header
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded
+    span.navbar-brand.font-weight-bold.fw-bold FlatStack's blog
+    .collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.btn.btn-outline-warning.border style="margin: auto 5px"
+          = link_to 'News', home_path, class: 'nav-link'
+        li.nav-item.btn.btn-outline-warning.border style="margin: auto 5px"
+          = link_to 'My List', cards_path, class: 'nav-link'
+        li.nav-item.btn.btn-outline-warning.border style="margin: auto 5px"
+          = link_to 'Create Card', new_card_path, class: 'nav-link'
+      ul.navbar-nav
+        -if session[:user_id]
+          li.nav-item.btn.btn-outline-primary.border style="margin-left: 1200px"
+            = link_to 'Logout', logout_path, method: :delete, class: 'nav-link'
+        -else
+          li.nav-item.btn.btn-outline-warning.border style="margin: auto 5px"
+            = link_to 'Sign Up', signup_path, class: 'nav-link'
+          li.nav-item.btn.btn-outline-warning.border style="margin: auto 5px"
+            = link_to 'Sign In', signin_path, class: 'nav-link'
+
+
+          

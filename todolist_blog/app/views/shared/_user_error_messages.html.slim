@@ -1,0 +1,9 @@
+- if @user.errors.any?
+  #error_explanation
+    .alert.alert-danger.alert-dismissible.fade.show role="alert" 
+      | The form contains #{pluralize(@user.errors.count, "error")}.
+      ul
+        - @user.errors.full_messages.each do |msg|
+          li= msg
+      button.close aria-label="Close" data-dismiss="alert" type="button" 
+        span aria-hidden="true"  ×

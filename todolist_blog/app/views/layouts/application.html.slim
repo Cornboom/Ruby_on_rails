@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title FlatStack's blog
+    = csrf_meta_tags
+    = csp_meta_tag
+    style
+      |  body { background-image: url('https://million-wallpapers.ru/wallpapers/3/63/452660933689335/zolotoj-i-sinij.jpg'); background-size: cover; cursor: pointer; font-style: oblique}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    = render partial: 'shared/header'
+    main#main
+      = yield

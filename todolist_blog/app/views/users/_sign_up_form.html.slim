@@ -1,0 +1,16 @@
+.container style="font-size:25px; font-weight: bold;"
+  = form_for(@user) do |form|
+    = render 'shared/user_error_messages'
+    .mb-3
+      = form.label :nickname
+      = form.text_field :nickname, class: 'form-control', placeholder: 'Enter your nickname'
+    .mb-3
+      = form.label :email
+      = form.text_field :email, class: 'form-control', placeholder: 'Enter your email'
+    .mb-3
+      = form.label :password
+      = form.password_field :password, class: 'form-control', placeholder: 'Enter your password'
+    .mb-3
+      = form.label :password_confirmation
+      = form.password_field :password_confirmation, class: 'form-control', placeholder: 'Repeat your password'
+    .mb-3= form.submit 'Sign Up', class: 'btn btn-primary'

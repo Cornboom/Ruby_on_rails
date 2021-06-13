@@ -1,0 +1,9 @@
+.container style="font-size:25px; font-weight: bold;"
+  = form_tag do
+    .mb-3
+      = label_tag :email
+      = text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Enter your email'
+    .mb-3
+      = label_tag :password
+      = password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Enter your password'
+    .mb-3= submit_tag 'Sign In', class: 'btn btn-primary'

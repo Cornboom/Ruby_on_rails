@@ -1,0 +1,17 @@
+.card style="background: transparent; margin: 50px;"
+  h1.card-header
+    = @card.title
+    br
+    br
+    | Author:
+    = User.find_by(id: @card.user_id).nickname
+    br
+    - if @current_user && @current_user.id == @card.user_id
+      = link_to 'Edit', edit_card_path(@card), class: 'btn btn-warning border', style: "margin: auto 5px"
+    |
+    = link_to 'Back to list', cards_path, class: 'btn btn-dark border'
+  h4.card-body= @card.description
+  .card-footer
+    = render template: 'comments/index'
+    hr
+    = render partial: 'comments/comment_form'

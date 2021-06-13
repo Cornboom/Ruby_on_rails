@@ -3,6 +3,6 @@ class CommentMailer < ApplicationMailer
 
   def received(user)
     @user = user
-    mail to: user.email, subject: 'Email confirmation about new comment'
+    mail to: user.email, subject: 'Email notification of a new comment'
   end
 end
